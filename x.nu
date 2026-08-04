@@ -89,6 +89,7 @@ export module pg {
         cargo run --bin migrate
     }
 }
+export use pg
 
 export module rpk  {
     export def send [
@@ -194,7 +195,7 @@ export module rpk  {
             localhost:33145
             --mode
             dev-container
-            --smp 1
+            --smp '1'
             --default-log-level=info
         ]
         if $dry_run {
@@ -232,6 +233,7 @@ export module rpk  {
         }
     }
 }
+export use rpk
 
 export module iggy {
     export def up [
@@ -355,6 +357,7 @@ export module ui {
         lg level 1 'end'
     }
 }
+export use ui
 
 export module hooks {
     def cmpl-reg [] {
@@ -375,6 +378,7 @@ export module hooks {
         }
     }
 }
+export use hooks
 
 export module chat {
     use pg
@@ -411,6 +415,7 @@ export module chat {
         cargo build --release --bin chat
     }
 }
+export use chat
 
 export module gw {
     use rpk
@@ -467,6 +472,7 @@ export module gw {
     }
 
 }
+export use gw
 
 export module test {
     export def serve [] {
@@ -502,6 +508,7 @@ export module test {
         oha -c 50 -n 200000 $url
     }
 }
+export use test
 
 export def receiver [] {
     let c = open $CFG
@@ -533,7 +540,6 @@ def cmpl-external [] {
     | { completions: $in, options: { sort: false } }
 }
 
-use rpk
 export def send [
     file:string@cmpl-data
     --receiver(-r): list<string>@receiver = []
@@ -610,6 +616,10 @@ export def 'update images' [] {
 export def clippy [dir] {
     cd $dir
     cargo clippy
+}
+
+export def inix [] {
+    nix develop -c nu
 }
 
 export def jsonschema [] {
