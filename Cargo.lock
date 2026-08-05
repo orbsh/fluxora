@@ -9596,7 +9596,6 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "brick",
- "ciborium",
  "content",
  "futures",
  "gloo-net 0.7.0",
@@ -9606,6 +9605,7 @@ dependencies = [
  "markdown",
  "message",
  "minijinja",
+ "send_wrapper",
  "serde",
  "serde_json",
  "tracing-wasm",

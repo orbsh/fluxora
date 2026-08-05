@@ -19,3 +19,8 @@ pub fn set_id(el: &web_sys::Element, id: &str) {
 pub fn mount(parent: &web_sys::Node, child: &web_sys::Node) {
     let _ = parent.append_child(child);
 }
+
+/// 在全局作用域执行一段 JS（chart/diagram/placeholder fade/rack scroll 等）。
+pub fn eval(js: &str) {
+    let _ = web_sys::window().unwrap().eval_with_str(js);
+}
