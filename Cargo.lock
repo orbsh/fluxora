@@ -9565,7 +9565,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b6f5e870be6c3b371b77fe0ee0bafb859fa4964b4404c27de1d380043c4dda20"
 
 [[package]]
-name = "ui"
+name = "ui_dixous"
 version = "0.1.0"
 dependencies = [
  "anyhow",
@@ -9586,12 +9586,22 @@ dependencies = [
  "serde",
  "serde_json",
  "tracing-wasm",
- "ui_macro",
+ "ui_dixous_macro",
  "web-sys",
 ]
 
 [[package]]
-name = "ui-leptos"
+name = "ui_dixous_macro"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
+]
+
+[[package]]
+name = "ui_leptos"
 version = "0.1.0"
 dependencies = [
  "anyhow",
@@ -9608,6 +9618,7 @@ dependencies = [
  "send_wrapper",
  "serde",
  "serde_json",
+ "tracing",
  "tracing-wasm",
  "ui_leptos_macro",
  "wasm-bindgen",
@@ -9618,16 +9629,6 @@ dependencies = [
 name = "ui_leptos_macro"
 version = "0.1.0"
 dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.119",
-]
-
-[[package]]
-name = "ui_macro"
-version = "0.1.0"
-dependencies = [
- "anyhow",
  "proc-macro2",
  "quote",
  "syn 2.0.119",

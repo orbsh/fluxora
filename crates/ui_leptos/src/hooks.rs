@@ -119,3 +119,30 @@ pub fn use_target<'a>(
 pub fn use_target_value(ctx: Ctx, brick: &impl BrickOps) -> Option<impl Fn(Value)> {
     use_target(ctx, brick, "value")
 }
+/// 表单信号共享：`form_` 构建 `FormState` 并压栈，`input_`/`button_`
+/// 在渲染期间从栈顶取字段/确认信号。因 `BindVariant` 的 `signal` 字段
+/// 在非 dioxus 构建下被 cfg 掉，改用线程栈传递信号句柄。
+#[derive(Clone)]
+pub struct FormState {
+    pub fields: std::collections::HashMap<String, RwSignal<Value>>,
+    pub confirm: RwSignal<Value>,
+}
+
+thread_local! {
+    static FORM_STACK: std::cell::RefCell<Vec<std::rc::Rc<FormState>>> =
+        std::cell::RefCell::new(Vec::new());
+}
+
+pub fn push_form(fs: FormState) {
+    FORM_STACK.with(|s| s.borrow_mut().push(std::rc::Rc::new(fs)));
+}
+
+pub fn pop_form() {
+    FORM_STACK.with(|s| {
+        s.borrow_mut().pop();
+    });
+}
+
+pub fn peek_form() -> Option<std::rc::Rc<FormState>> {
+    FORM_STACK.with(|s| s.borrow().last().cloned())
+}

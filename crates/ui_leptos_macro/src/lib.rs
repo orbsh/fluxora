@@ -136,11 +136,11 @@ pub fn gen_dispatch(input: TokenStream) -> TokenStream {
                         *tc += 1;
                         format!(#tag, *tc)
                     });
-                    crate::components::#comp(c, ctx, id)
+                    crate::components::#comp(c.clone(), ctx, id)
                 }
             }
         } else {
-            quote! { crate::components::#comp(c, ctx) }
+            quote! { crate::components::#comp(c.clone(), ctx) }
         };
 
         // 有 sub 的容器由组件内部递归 dispatch，宏只负责分发

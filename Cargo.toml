@@ -8,9 +8,9 @@ members = [
   "crates/content",
   "crates/gateway",
   "crates/message",
-  "crates/ui",
-  "crates/ui_macro",
-  "crates/ui-leptos",
+  "crates/ui_dixous",
+  "crates/ui_dixous_macro",
+  "crates/ui_leptos",
   "crates/ui_leptos_macro",
 ]
 

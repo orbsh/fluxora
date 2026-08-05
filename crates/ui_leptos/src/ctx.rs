@@ -44,11 +44,12 @@ impl Ctx {
 
         // 订阅 WS 消息并分发
         let bytes = ctx.ws.message_bytes();
+        let ctx_clone = ctx.clone();
         Effect::new(move |_| {
             let b = bytes.get();
             if !b.is_empty() {
-                if let Ok(act) = ctx.codec.decode::<Message<Brick>>(&b) {
-                    dispatch_msg(&act, &ctx);
+                if let Ok(act) = ctx_clone.codec.decode::<Message<Brick>>(&b) {
+                    dispatch_msg(&act, &ctx_clone);
                 }
             }
         });

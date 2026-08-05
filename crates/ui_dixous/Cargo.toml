@@ -1,5 +1,5 @@
 [package]
-name = "ui"
+name = "ui_dixous"
 version = "0.1.0"
 authors = ["nash <fj0rd@qq.com>"]
 edition = "2024"
@@ -27,7 +27,7 @@ serde.features = ["derive", "serde_derive"]
 serde.workspace = true
 serde_json.workspace = true
 tracing-wasm.workspace = true
-ui_macro.path = "../ui_macro"
+ui_dixous_macro = { path = "../ui_dixous_macro" }
 web-sys.workspace = true
 
 [features]

@@ -1,5 +1,5 @@
 [package]
-name = "ui-leptos"
+name = "ui_leptos"
 version = "0.1.0"
 edition = "2024"
 
@@ -21,6 +21,7 @@ minijinja = { workspace = true, features = ["loader"] }
 send_wrapper = "0.6"
 serde.workspace = true
 serde_json.workspace = true
+tracing.workspace = true
 tracing-wasm.workspace = true
 ui_leptos_macro = { path = "../ui_leptos_macro" }
 wasm-bindgen.workspace = true

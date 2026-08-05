@@ -22,5 +22,5 @@ pub fn mount(parent: &web_sys::Node, child: &web_sys::Node) {
 
 /// 在全局作用域执行一段 JS（chart/diagram/placeholder fade/rack scroll 等）。
 pub fn eval(js: &str) {
-    let _ = web_sys::window().unwrap().eval_with_str(js);
+    let _ = js_sys::eval(js);
 }
