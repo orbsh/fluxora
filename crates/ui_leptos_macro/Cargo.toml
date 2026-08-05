@@ -1,0 +1,12 @@
+[package]
+name = "ui_leptos_macro"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+quote.workspace = true
+proc-macro2.workspace = true
+syn = { workspace = true, features = ["full", "extra-traits"] }
+
+[lib]
+proc-macro = true

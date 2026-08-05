@@ -1,0 +1,31 @@
+[package]
+name = "ui-leptos"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+anyhow.workspace = true
+brick = { path = "../brick", default-features = false, features = ["classify", "merge", "ops", "render"] }
+content = { workspace = true }
+futures.workspace = true
+gloo-net.workspace = true
+itertools.workspace = true
+js-sys.workspace = true
+leptos = { version = "0.8", features = ["csr"] }
+markdown.workspace = true
+message = { path = "../message", default-features = false }
+minijinja = { workspace = true, features = ["loader"] }
+send_wrapper = "0.6"
+serde.workspace = true
+serde_json.workspace = true
+tracing-wasm.workspace = true
+ui_leptos_macro = { path = "../ui_leptos_macro" }
+wasm-bindgen.workspace = true
+web-sys.workspace = true
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1

@@ -10,6 +10,8 @@ members = [
   "crates/message",
   "crates/ui",
   "crates/ui_macro",
+  "crates/ui-leptos",
+  "crates/ui_leptos_macro",
 ]
 
 [workspace.dependencies]
@@ -67,9 +69,11 @@ tracing-serde = "0.2.0"
 tracing-subscriber = { version = "0.3.23", features = ["json", "env-filter"] }
 pyo3 = "0.28.3"
 
+leptos = "0.8"
 tracing-wasm = "0.2.1"
 url = "2.5.8"
 urlencoding = "2.1.3"
+wasm-bindgen = "0.2.121"
 web-sys = "0.3.98"
 
 [workspace.package]
