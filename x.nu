@@ -293,14 +293,14 @@ export module ui {
     export def up [] {
         let t = open $CFG | get dx
         cd crates/ui_leptos
-        ^trunk serve --port $t.port
+        env -u NO_COLOR trunk serve --port $t.port
     }
 
     export def build [] {
         cd crates/ui_leptos
-        rm -rf .../dist
-        ^trunk build --release
-        dust .../dist
+        rm -rf dist
+        env -u NO_COLOR trunk build --release
+        dust dist
     }
 
     export def 'border flashing' [] {
