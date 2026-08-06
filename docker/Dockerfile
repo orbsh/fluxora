@@ -4,9 +4,9 @@ WORKDIR /app
 COPY . .
 RUN cargo build --release --bin gateway
 RUN set -eux \
-  ; cd crates/ui \
+  ; cd crates/ui_leptos \
   ; cat index.html | rg --passthru 'data-host=".+"' -r '' > index.html \
-  ; dx build --web --release \
+  ; trunk build --release \
   \
   ; mkdir -p assets \
   ; cd assets \
@@ -23,6 +23,6 @@ COPY --from=builder /app/target/release/gateway /app/gateway
 COPY gateway.toml /app
 COPY manifest /app/manifest
 
-COPY --from=builder /app/target/dx/ui/release/web/public/ /app/static
-COPY --from=builder /app/crates/ui/assets /app/static/assets
+COPY --from=builder /app/crates/ui_leptos/dist/ /app/static
+COPY --from=builder /app/crates/ui_leptos/assets /app/static/assets
 CMD ["/app/gateway"]

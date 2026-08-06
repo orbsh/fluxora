@@ -172,8 +172,8 @@ Components merge by `id` matching. Multiple services can stream to the same page
 | `message` | Unified message protocol — Envelope, ChatMessage, Event trait, Kafka/Iggy adapters |
 | `content` | Content action types — Create, Set, Join, Tmpl, Empty. Method enum (Replace/Concat/Delete) |
 | `gateway` | WebSocket router + template engine + webhook dispatcher + session management |
-| `ui` | Dioxus/WASM frontend — Frame renderer, dynamic component dispatch, WS store, streaming merge |
-| `ui_macro` | UI component derive macros |
+| `ui_leptos` | Leptos/WASM frontend — Frame renderer, dynamic component dispatch, WS store, streaming merge |
+| `ui_leptos_macro` | UI component derive macros |
 | `chat` | Demo business service — channel-based chat with user/agent management |
 | `agent` | Agent service skeleton |
 

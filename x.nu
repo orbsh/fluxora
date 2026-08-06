@@ -292,15 +292,15 @@ export module iggy {
 export module ui {
     export def up [] {
         let t = open $CFG | get dx
-        cd crates/ui
-        ^dx serve --port $t.port
+        cd crates/ui_leptos
+        ^trunk serve --port $t.port
     }
 
     export def build [] {
-        cd crates/ui
-        rm -rf .../target/dx/ui/release/web/public/
-        ^dx build --web --release
-        dust .../target/dx/ui/release/web/public/
+        cd crates/ui_leptos
+        rm -rf .../dist
+        ^trunk build --release
+        dust .../dist
     }
 
     export def 'border flashing' [] {
@@ -345,7 +345,7 @@ export module ui {
         use git/shortcut.nu *
         use lg
         lg level 1 'begin'
-        cp crates/ui/assets/main.css ../ydncf/index.css
+        cp crates/ui_leptos/assets/main.css ../ydncf/index.css
         let msg = git-last-commit
         let msg = $"($msg.message)\n\n($msg.body)"
         cd ../ydncf
@@ -648,7 +648,7 @@ module macro {
     }
 
     export def ui [] {
-        cargo test -p ui_macro
+        cargo test -p ui_leptos_macro
     }
 }
 

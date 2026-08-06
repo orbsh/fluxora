@@ -5,7 +5,8 @@ RUN set -eux \
   ; curl -fsSL https://github.com/cargo-bins/cargo-binstall/releases/latest/download/cargo-binstall-x86_64-unknown-linux-musl.tgz \
     | tar zxf - -C /usr/local/bin/ \
     ; chmod +x /usr/local/bin/cargo-binstall \
-  ; cargo binstall -y cargo-chef dioxus-cli \
+  ; cargo binstall -y cargo-chef trunk \
+  ; rustup target add wasm32-unknown-unknown \
   ; apt update \
   ; apt-get install -y --no-install-recommends \
         ripgrep cmake \
