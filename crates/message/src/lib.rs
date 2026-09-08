@@ -6,13 +6,11 @@ pub mod codec;
 pub mod session;
 use session::Session;
 pub mod config;
-#[cfg(feature = "iggy")]
-mod iggy;
-#[cfg(any(feature = "kafka", feature = "iggy"))]
+#[cfg(feature = "kafka")]
 pub mod instance;
 #[cfg(feature = "kafka")]
 mod kafka;
-#[cfg(any(feature = "kafka", feature = "iggy"))]
+#[cfg(feature = "kafka")]
 pub mod queue;
 pub mod time;
 

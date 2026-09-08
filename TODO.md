@@ -6,7 +6,6 @@
   - [ ] CBOR support
   - [ ] rkyv
 - Streaming
-  - [ ] iggy
   - [ ] walrus
   - [ ] s2
 - [ ] Allow template rendering of webhook request results

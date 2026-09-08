@@ -1,6 +1,4 @@
 use chrono::{DateTime, LocalResult, TimeZone, Utc};
-#[cfg(feature = "iggy")]
-use iggy::prelude::IggyTimestamp;
 #[cfg(feature = "kafka")]
 use rdkafka::Timestamp;
 use serde::{Deserialize, Serialize};
@@ -41,15 +39,4 @@ impl From<Timestamp> for Created {
     }
 }
 
-#[cfg(feature = "iggy")]
-impl From<IggyTimestamp> for Created {
-    fn from(value: IggyTimestamp) -> Self {
-        if let LocalResult::Single(ts) = Utc.timestamp_micros(value.as_micros() as i64) {
-            return Self(ts);
-        }
-        match Utc.timestamp_millis_opt(0) {
-            LocalResult::Single(ts) => Self(ts),
-            _ => unreachable!(),
-        }
-    }
-}
+

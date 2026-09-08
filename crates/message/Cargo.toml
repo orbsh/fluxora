@@ -15,11 +15,9 @@ thiserror.workspace = true
 ciborium.workspace = true
 tokio = { workspace = true, optional = true }
 rdkafka = { workspace = true, optional = true }
-iggy = { workspace = true, optional = true }
 anyhow.workspace = true
 futures-util.workspace = true
 
 [features]
-default = ["kafka", "iggy"]
+default = ["kafka"]
 kafka = ["dep:rdkafka", "dep:tokio"]
-iggy = ["dep:iggy", "dep:tokio"]
