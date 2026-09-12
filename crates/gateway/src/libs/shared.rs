@@ -6,9 +6,9 @@ use dashmap::{
     iter::Iter,
     mapref::{multiple::RefMulti, one::Ref},
 };
+use content::codec::{ActiveCodec, CodecType};
 use message::{
     ChatMessage,
-    codec::{ActiveCodec, CodecType},
     session::{Session, SessionCount},
     time::Created,
 };

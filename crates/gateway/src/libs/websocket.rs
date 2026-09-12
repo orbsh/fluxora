@@ -6,7 +6,7 @@ use arc_swap::ArcSwap;
 use axum::extract::ws::WebSocket;
 use dashmap::Entry;
 use futures::{sink::SinkExt, stream::StreamExt};
-use message::codec::{ActiveCodec, CodecType};
+use content::codec::{ActiveCodec, CodecType};
 use message::{
     Event,
     session::{Session, SessionInfo},

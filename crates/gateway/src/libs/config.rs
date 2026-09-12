@@ -3,7 +3,7 @@ use figment::{
     providers::{Env, Format, Toml},
 };
 use indexmap::IndexMap;
-use message::codec::CodecType;
+use content::codec::CodecType;
 use message::config::Queue;
 use notify::{Event, RecursiveMode, Result as ResultN, Watcher, recommended_watcher};
 use serde::{Deserialize, Serialize};

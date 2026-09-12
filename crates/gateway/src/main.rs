@@ -13,7 +13,7 @@ use libs::config::{ASSETS_PATH, Config, LiveConfig, LogFormat};
 use libs::shared::{Sender, StateChat};
 use libs::template::Tmpls;
 use libs::websocket::{handle_ws, send_to_ws};
-use message::codec::ActiveCodec;
+use content::codec::ActiveCodec;
 use message::queue::MessageQueue;
 use serde_json::{Map, Value};
 use std::sync::Arc;
@@ -100,7 +100,7 @@ async fn main() -> Result<()> {
                     tracing::info!("URL query params: {:?}", q);
                     if let Some(codec_str) = q.get("codec").and_then(|v| v.as_str()) {
                         tracing::info!("Found codec param: {}", codec_str);
-                        if let Ok(ct) = codec_str.parse::<message::codec::CodecType>() {
+                        if let Ok(ct) = codec_str.parse::<content::codec::CodecType>() {
                             codec = ActiveCodec::new(ct);
                             tracing::info!("Codec set to: {:?}", ct);
                         }

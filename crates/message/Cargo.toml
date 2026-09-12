@@ -1,0 +1,24 @@
+[package]
+name = "message"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+serde.workspace = true
+serde_derive.workspace = true
+serde_json.workspace = true
+serde_with = "3.19.0"
+time = "0.3.47"
+tracing.workspace = true
+chrono.workspace = true
+thiserror = "2.0.18"
+ciborium.workspace = true
+anyhow = "1.0.102"
+futures-util = "0.3.32"
+# kafka transport is off by default: fluxen is rendering-only;
+# the producer side (Fluxora / Prism) enables it via path dependency
+tokio = { version = "1.52.3", optional = true }
+rdkafka = { version = "0.39", optional = true, features = ["ssl-vendored", "libz-static"] }
+
+[features]
+kafka = ["dep:rdkafka", "dep:tokio"]
