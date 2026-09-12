@@ -2,21 +2,21 @@
 
 > Events flow. Intelligence appears.
 
-An **event-driven, AI-native UI framework** built in Rust. Fluxora decouples business logic from presentation through a message-queue-centric architecture, using a declarative JSON DSL (`Brick`) to describe interfaces. AI generates structured JSON (not code), validated by auto-exported JSON Schema, rendered dynamically by Dioxus/WASM.
+An **event-driven, AI-native UI framework** built in Rust. Fluxora decouples business logic from presentation through a message-queue-centric architecture, using a declarative JSON DSL (`Brick`) to describe interfaces. AI generates structured JSON (not code), validated by auto-exported JSON Schema, rendered dynamically by Leptos/WASM.
 
 ## Architecture
 
 ```
 ┌──────────┐   WS    ┌──────────┐  outgo   ┌─────────────────┐
 │   UI     │◄───────►│ Gateway  │─────────►│ Business Service│
-│ (Dioxus) │         │ (Axum)   │          │ (Chat, CRM, AI…)│
+│ (Leptos) │         │ (Axum)   │          │ (Chat, CRM, AI…)│
 └──────────┘         └────┬─────┘          └────────┬────────┘
                           │   income                │
                           └─────────────────────────┘
 ```
 
-- **UI**: WASM frontend (Dioxus) renders `Brick` JSON trees. Components bind to event names — no API URLs, no HTTP verbs.
-- **Gateway**: WebSocket router. Dispatches UI events to Kafka/Iggy `outgo` queue; delivers backend `income` messages to the correct WS session.
+- **UI**: WASM frontend (Leptos) renders `Brick` JSON trees. Components bind to event names — no API URLs, no HTTP verbs.
+- **Gateway**: WebSocket router. Dispatches UI events to the Kafka `outgo` queue; delivers backend `income` messages to the correct WS session.
 - **Business Services**: Independent consumers of `outgo`/`income`. Each service (chat, crm, echo, analysis…) handles its own logic, calls AI, pushes results back. Services are **transparent** to each other — an analysis service can intercept chat streams without the chat service knowing.
 
 ## Quick Start
@@ -169,7 +169,7 @@ Components merge by `id` matching. Multiple services can stream to the same page
 |-------|-------------|
 | `brick` | Core JSON DSL — Brick enum, attributes, binding, serialization, JsonSchema export |
 | `brick_macro` | Derive macros for `BrickOps`, `ClassifyBrick`, `ClassifyAttrs`, render hints |
-| `message` | Unified message protocol — Envelope, ChatMessage, Event trait, Kafka/Iggy adapters |
+| `message` | Unified message protocol — Envelope, ChatMessage, Event trait, Kafka adapter |
 | `content` | Content action types — Create, Set, Join, Tmpl, Empty. Method enum (Replace/Concat/Delete) |
 | `gateway` | WebSocket router + template engine + webhook dispatcher + session management |
 | `ui_leptos` | Leptos/WASM frontend — Frame renderer, dynamic component dispatch, WS store, streaming merge |

@@ -3,13 +3,7 @@ resolver = "3"
 members = [
   "crates/agent",
   "crates/chat",
-  "crates/brick",
-  "crates/brick_macro",
-  "crates/content",
   "crates/gateway",
-  "crates/message",
-  "crates/ui_leptos",
-  "crates/ui_leptos_macro",
 ]
 
 [workspace.dependencies]
@@ -19,25 +13,23 @@ ciborium = "0.2"
 axum = "0.8.9"
 axum-extra = { version = "0.12" }
 bon = "3.9.1"
-brick = { path = "crates/brick", version = "^0.1.0", features = ["classify", "dioxus", "merge", "render"] } #unified
+brick = { path = "../fluxen/crates/brick", version = "^0.1.0", features = ["classify", "dioxus", "merge", "render"] } #unified
 chrono = { version = "0.4.44", features = ["serde"] }
-content = { path = "crates/content", version = "^0.1.0" } #unified
+content = { path = "../fluxen/crates/content", version = "^0.1.0" } #unified
 dioxus = { version = "0.7.9" }
 figment = { version = "0.10.19", features = ["toml", "env"] }
 futures = "0.3.32"
 futures-util = "0.3.32"
-gloo-net = "0.7.0"
 indexmap = { version = "2.14.0", features = ["serde"] }
 indoc = "2.0.7"
 itertools = "0.14.0"
-js-sys = "0.3.98"
 libc = "0.2.186"
 listenfd = "1.0.2"
 maplit = "1.0.2"
 dashmap = "6.1.0"
 arc-swap = "1.9.1"
 markdown = "1.0.0"
-message = { path = "crates/message", version = "^0.1.0" } #unified
+message = { path = "../fluxen/crates/message", version = "^0.1.0" } #unified
 minijinja = { version = "2.19.0", features = ["loader"] }
 notify = "8.2.0"
 postcard = { version = "1.1.3", features = ["use-std"] }
@@ -55,7 +47,6 @@ serde_with = "3.19.0"
 serde_yaml = "0.9.34"
 short-uuid = "0.2.1"
 sqlx = { version = "0.8.6" }
-syn = { version = "2.0.117", features = ["extra-traits", "full"] }
 thiserror = "2.0.18"
 time = "0.3.47"
 tokio = { version = "1.52.3", features = ["full"] }
@@ -66,12 +57,8 @@ tracing-serde = "0.2.0"
 tracing-subscriber = { version = "0.3.23", features = ["json", "env-filter"] }
 pyo3 = "0.28.3"
 
-leptos = "0.8"
-tracing-wasm = "0.2.1"
 url = "2.5.8"
 urlencoding = "2.1.3"
-wasm-bindgen = "0.2.121"
-web-sys = "0.3.98"
 
 [workspace.package]
 rust-version = "1.88.0"

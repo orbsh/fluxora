@@ -15,7 +15,7 @@ bon.workspace = true
 figment.workspace = true
 futures.workspace = true
 indexmap.workspace = true
-message = { workspace = true } #unified
+message = { workspace = true, features = ["kafka"] } #unified
 minijinja.workspace = true
 libc.workspace = true
 listenfd.workspace = true

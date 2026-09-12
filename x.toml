@@ -1,4 +1,4 @@
-[dx]
+[leptos]
 port = 3001
 [server]
 host = 'localhost:3000'

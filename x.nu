@@ -235,69 +235,15 @@ export module rpk  {
 }
 export use rpk
 
-export module iggy {
-    export def up [
-        --dry-run
-    ] {
-        let image = 'apache/iggy:latest'
-        let name = 'iggy'
-        mut args = [run -d --name $name --network=host]
-        let addr = {
-            IGGY_HTTP_ADDRESS: 3006 # '0.0.0.0:3000'
-            IGGY_QUIC_ADDRESS: 8086 # '0.0.0.0:8080'
-            IGGY_TCP_ADDRESS:  8096 # '0.0.0.0:8090'
-            IGGY_WEBSOCKET_ADDRESS: 8092 # '0.0.0.0:8092'
-        }
-        for i in ($addr | transpose k v) {
-            let real = port $i.v
-            if $real != $i.v {
-                print $"(ansi grey)Port ($i) is already in use, switching to ($real)(ansi reset)"
-            }
-            $args ++= [-e $"($i.k)=0.0.0.0:($i.v)" ]
-            $args ++= [-p $"($i.v):($real)"]
-        }
-        let envs = {
-            IGGY_ROOT_USERNAME: 'iggy'
-            IGGY_ROOT_PASSWORD: 'iggy'
-        }
-        for i in ($envs | transpose k v) {
-            $args ++= [-e $"($i.k)=($i.v)"]
-        }
-        let data = [$WORKDIR data iggy] | path join
-        $args ++= [-v $"($data):/local_data"]
-        $args ++= [
-            --cap-add SYS_NICE
-            --security-opt seccomp=unconfined
-            --ulimit memlock=-1:-1
-        ]
-        $args ++= [$image]
-
-        if $dry_run {
-            print $"($env.CNTRCTL) ($args | str join ' ')"
-        } else {
-            dcr $name
-            ^$env.CNTRCTL ...$args
-            let base = [exec -it $name iggy --tcp-server-address $"localhost:($addr.IGGY_TCP_ADDRESS)" --username iggy --password iggy]
-            wait-cmd -t $'wait ($name)' {
-                ^$env.CNTRCTL ...[...$base me]
-            }
-            ^$env.CNTRCTL ...[...$base stream create fluxora]
-            ^$env.CNTRCTL ...[...$base topic create fluxora event 1 none]
-            ^$env.CNTRCTL ...[...$base topic create fluxora push 1 none]
-        }
-
-    }
-}
-
 export module ui {
     export def up [] {
-        let t = open $CFG | get dx
-        cd crates/ui_leptos
+        let t = open $CFG | get leptos
+        cd ../fluxen/crates/ui_leptos
         env -u NO_COLOR trunk serve --port $t.port
     }
 
     export def build [] {
-        cd crates/ui_leptos
+        cd ../fluxen/crates/ui_leptos
         rm -rf dist
         env -u NO_COLOR trunk build --release
         dust dist
@@ -345,7 +291,7 @@ export module ui {
         use git/shortcut.nu *
         use lg
         lg level 1 'begin'
-        cp crates/ui_leptos/assets/main.css ../ydncf/index.css
+        cp ../fluxen/crates/ui_leptos/assets/main.css ../ydncf/index.css
         let msg = git-last-commit
         let msg = $"($msg.message)\n\n($msg.body)"
         cd ../ydncf
@@ -623,10 +569,12 @@ export def inix [] {
 }
 
 export def jsonschema [] {
+    cd ../fluxen
     cargo run --example brickschema --features=schema
 }
 
 export def brick_test [] {
+    cd ../fluxen
     cargo run --example scratch --features="scratch"
 }
 
@@ -644,10 +592,12 @@ export def git-hooks [act ctx] {
 
 module macro {
     export def brick [] {
+        cd ../fluxen
         cargo test -p brick_macro test_macro
     }
 
     export def ui [] {
+        cd ../fluxen
         cargo test -p ui_leptos_macro
     }
 }
