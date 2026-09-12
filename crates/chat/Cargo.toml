@@ -7,7 +7,7 @@ edition = "2024"
 anyhow.workspace = true
 async-fs.workspace = true
 axum.workspace = true
-brick = { workspace = true, features = ["classify", "dioxus", "merge", "render"] } #unified
+brick = { workspace = true, features = ["classify", "dioxus", "merge", "template"] } #unified
 chrono.workspace = true
 content = { workspace = true } #unified
 figment.workspace = true
